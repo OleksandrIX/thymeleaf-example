@@ -4,7 +4,8 @@ import com.spring.thymeleafexample.entity.Serviceman;
 import com.spring.thymeleafexample.service.ServicemanService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -23,14 +24,6 @@ public class MainController {
         System.out.println(servicemen);
         model.addAttribute("servicemen", servicemen);
         return "index";
-    }
-
-    @GetMapping("/edit/{id}")
-    public String getDataServiceman(@PathVariable Integer id, Model model) {
-        Serviceman serviceman = servicemanService.getOneServicemanById(id);
-        model.addAttribute("serviceman", serviceman);
-
-        return "edit";
     }
 
     @GetMapping("/create")

@@ -33,7 +33,7 @@
                 <td th:text="${serviceman.getPosition()}"></td>
                 <td th:text="${serviceman.getBirthDate()}"></td>
                 <td class="actions">
-                    <a th:href="@{/servicemen/edit/{id}(id = ${serviceman.getId()})}" class="edit-btn"><span>&#9998;</span></a>
+                    <a th:href="@{/servicemen/edit/{id}(id=${serviceman.getId()})}" class="edit-btn"><span>&#9998;</span></a>
                     <a href="#" class="delete-btn"><span>&#215;</span></a>
                 </td>
             </tr>
@@ -41,7 +41,7 @@
         </table>
 
         <div class="button-container">
-            <a href="/servicemen/create" class="create-btn">Створити нового військовослужбовця</a>
+            <a th:href="@{/servicemen/create}" class="create-btn">Створити нового військовослужбовця</a>
         </div>
     </div>
 </div>

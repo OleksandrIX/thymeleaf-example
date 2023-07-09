@@ -25,4 +25,8 @@ public class ServicemanService {
     public Serviceman saveServiceman(Serviceman serviceman) {
         return servicemanRepository.save(serviceman);
     }
+
+    public void deleteServiceman(int id){
+
+    }
 }
