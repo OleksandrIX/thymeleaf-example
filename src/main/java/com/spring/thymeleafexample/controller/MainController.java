@@ -4,7 +4,10 @@ import com.spring.thymeleafexample.entity.Serviceman;
 import com.spring.thymeleafexample.service.ServicemanService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -21,14 +24,22 @@ public class MainController {
     @GetMapping
     public String getAllServiceman(Model model) {
         List<Serviceman> servicemen = servicemanService.getAllServicemen();
-        System.out.println(servicemen);
         model.addAttribute("servicemen", servicemen);
         return "index";
     }
 
     @GetMapping("/create")
-    public String createServiceman(Model model) {
-        // Додатковий код для створення нового військовослужбовця
+    public String createServiceman() {
         return "create";
+    }
+
+    @PostMapping("/create")
+    public String createServiceman(@ModelAttribute("serviceman") Serviceman serviceman, BindingResult result) {
+        if (result.hasErrors()) {
+            System.out.println(result.hasErrors());
+            return "index";
+        }
+        servicemanService.saveServiceman(serviceman);
+        return "redirect:/servicemen";
     }
 }
