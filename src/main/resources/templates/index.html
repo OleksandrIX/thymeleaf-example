@@ -33,7 +33,7 @@
                 <td th:text="${serviceman.getPosition()}"></td>
                 <td th:text="${serviceman.getBirthDate()}"></td>
                 <td class="actions">
-                    <a href="#" class="edit-btn"><span>&#9998;</span></a>
+                    <a th:href="@{/servicemen/edit/{id}(id = ${serviceman.getId()})}" class="edit-btn"><span>&#9998;</span></a>
                     <a href="#" class="delete-btn"><span>&#215;</span></a>
                 </td>
             </tr>
