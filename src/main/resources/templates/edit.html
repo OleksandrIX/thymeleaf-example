@@ -2,44 +2,38 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" th:href="@{css/style.css}">
-    <title>Облік в/с</title>
+    <link rel="stylesheet" type="text/css" th:href="@{../css/style.css}">
+    <title>Редагування військовослужбовця</title>
 </head>
 <body>
 <div class="app">
-    <h2 class="title-page">
-        Облік в/с в підрозділі
-    </h2>
-
-    <div class="table-container">
-        <table class="table">
-            <thead class="table-head">
-            <tr>
-                <th>№</th>
-                <th>Прізвище</th>
-                <th>Ім'я</th>
-                <th>По батькові</th>
-                <th>Посада</th>
-                <th>Дата народження</th>
-                <th>Дії</th>
-            </tr>
-            </thead>
-            <tbody class="table-body">
-
-                <td th:text="${serviceman.getLastName()}"></td>
-                <td th:text="${serviceman.getFirstName()}"></td>
-                <td th:text="${serviceman.getMiddleName()}"></td>
-                <td th:text="${serviceman.getPosition()}"></td>
-                <td th:text="${serviceman.getBirthDate()}"></td>
-                <td class="actions">
-                </td>
-            </tbody>
-        </table>
-
-        <div class="button-container">
-            <a href="/servicemen/create" class="create-btn">Створити нового військовослужбовця</a>
+    <h2 class="title-page">Редагування військовослужбовця</h2>
+    <form th:action="@{/servicemen/edit}" method="post" th:object="${updatedServiceman}">
+        <input type="hidden" name="id" th:value="${serviceman.getId()}">
+        <div class="form-group">
+            <label for="lastName">Прізвище:</label>
+            <input type="text" id="lastName" th:value="${serviceman.getLastName()}" name="lastName" required>
         </div>
-    </div>
+        <div class="form-group">
+            <label for="firstName">Ім'я:</label>
+            <input type="text" id="firstName" th:value="${serviceman.getFirstName()}" name="firstName" required>
+        </div>
+        <div class="form-group">
+            <label for="middleName">По батькові:</label>
+            <input type="text" id="middleName" th:value="${serviceman.getMiddleName()}" name="middleName"  required>
+        </div>
+        <div class="form-group">
+            <label for="position">Посада:</label>
+            <input type="text" id="position" th:value="${serviceman.getPosition()}" name="position" required>
+        </div>
+        <div class="form-group">
+            <label for="birthDate">Дата народження:</label>
+            <input type="date" id="birthDate" th:value="${serviceman.getBirthDate()}" name="birthDate" required>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="submit-btn">Зберегти</button>
+        </div>
+    </form>
 </div>
 </body>
 </html>

@@ -22,11 +22,17 @@ public class ServicemanService {
         return servicemanRepository.findById(id).orElseThrow();
     }
 
-    public Serviceman saveServiceman(Serviceman serviceman) {
-        return servicemanRepository.save(serviceman);
+    public void saveServiceman(Serviceman serviceman) {
+        servicemanRepository.save(serviceman);
     }
 
-    public void deleteServiceman(int id){
+    public void updateServiceman(int id, Serviceman updatedServiceman) {
+        Serviceman serviceman = getOneServicemanById(id);
+        serviceman = updatedServiceman;
+        servicemanRepository.save(serviceman);
+    }
+
+    public void deleteServiceman(int id) {
 
     }
 }

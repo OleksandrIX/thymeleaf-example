@@ -2,10 +2,11 @@ package com.spring.thymeleafexample.controller;
 
 import com.spring.thymeleafexample.entity.Serviceman;
 import com.spring.thymeleafexample.service.ServicemanService;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,8 +28,35 @@ public class MainController {
     }
 
     @GetMapping("/create")
-    public String createServiceman(Model model) {
-        // Додатковий код для створення нового військовослужбовця
+    public String createServiceman() {
         return "create";
+    }
+
+    @PostMapping("/create")
+    public String createServiceman(@ModelAttribute("serviceman") Serviceman serviceman, BindingResult result) {
+        if (result.hasErrors()) {
+            System.out.println(result.hasErrors());
+            return "index";
+        }
+        servicemanService.saveServiceman(serviceman);
+        return "redirect:/servicemen";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String getServiceManEdit(@PathVariable Integer id, Model model) {
+        Serviceman serviceman = servicemanService.getOneServicemanById(id);
+        model.addAttribute("serviceman", serviceman);
+        return "edit";
+    }
+
+    @PostMapping("/edit")
+    public String editServiceman(@ModelAttribute("serviceman") Serviceman serviceman, BindingResult result) {
+        if (result.hasErrors()) {
+            System.out.println(result.hasErrors());
+            return "index";
+        }
+        System.out.println(serviceman.getId());
+        servicemanService.updateServiceman(serviceman.getId(), serviceman);
+        return "redirect:/servicemen";
     }
 }
